@@ -9,6 +9,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalViewConfiguration
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.apptikar.windowmanager.ui.adaptive.AdaptiveLayoutListAndDetailStacked
 import com.apptikar.windowmanager.ui.adaptive.AdaptiveLayoutScreenType.ListAndDetailStacked
@@ -32,7 +33,6 @@ fun App() {
 fun RootComposable(modifier: Modifier = Modifier) {
     val screenData = screenData.collectAsStateWithLifecycle()
     val adaptiveType =screenData.value?.toAdaptiveLayoutScreenType()
-
     when (adaptiveType) {
         is ScreenOnly -> {
             FirstScreen(modifier = Modifier.fillMaxSize().background(color = Color.Cyan))
