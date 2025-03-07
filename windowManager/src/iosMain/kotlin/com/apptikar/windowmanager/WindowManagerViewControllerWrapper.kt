@@ -2,7 +2,6 @@ package com.apptikar.windowmanager
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.ComposeUIViewController
-import com.apptikar.windowmanager.ui.theme.navigationBarColor
 import com.apptikar.windowmanager.utils.adaptive.getScreenClassifier
 import com.apptikar.windowmanager.utils.adaptive.sendWindowSize
 import com.apptikar.windowmanager.utils.adaptive.setupObservers
@@ -10,8 +9,6 @@ import kotlinx.cinterop.CValue
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.useContents
 import platform.CoreGraphics.CGSize
-import platform.UIKit.UIColor
-import platform.UIKit.UIToolbar
 import platform.UIKit.UIViewController
 import platform.UIKit.UIViewControllerTransitionCoordinatorProtocol
 import platform.UIKit.addChildViewController
