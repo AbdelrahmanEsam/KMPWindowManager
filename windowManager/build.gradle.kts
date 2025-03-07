@@ -15,7 +15,7 @@ version = "1.0.0"
 
 kotlin {
     androidTarget {
-        publishLibraryVariants("release")
+        publishLibraryVariants("release" )
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_21)
         }
