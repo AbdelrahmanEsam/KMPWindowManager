@@ -1,5 +1,8 @@
 # KMPWindowManager
 
+<div align="center">
+<a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
+</div>
 
 ### KMPWindowManager  provides a unified API that allows you to support different screen sizes and orientations and more.
 
@@ -8,7 +11,6 @@
 
 KMPWindowManager is available on mavenCentral().
 
-[![Thumbnail](https://img.youtube.com/vi/eF-OnkJoI0U/0.jpg)](https://www.youtube.com/watch?v=eF-OnkJoI0U)
 
 ## Install
 
