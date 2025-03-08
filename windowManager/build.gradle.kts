@@ -1,5 +1,14 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.io.FileInputStream
+import java.util.Properties
+
+
+tasks.register("copy-secret-to-gradle-properties") {
+    val secretsPropertiesFile = rootProject.file("secrets.properties")
+    val gradlePropertiesFile = rootProject.file("gradle.properties")
+    gradlePropertiesFile.appendText(secretsPropertiesFile.readText())
+}
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -8,14 +17,15 @@ plugins {
     alias(libs.plugins.jetbrainsCompose)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.maven.publish)
+    alias(libs.plugins.gradle.secrets)
 }
 
-group = "io.github.kotlin"
+group = "io.github.abdelrahmanesam"
 version = "1.0.0"
 
 kotlin {
     androidTarget {
-        publishLibraryVariants("release" )
+        publishLibraryVariants("release")
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_21)
         }
@@ -38,7 +48,6 @@ kotlin {
                 implementation(compose.material)
                 implementation(compose.ui)
                 implementation(compose.components.resources)
-                implementation(compose.components.uiToolingPreview)
                 api(libs.kotlinx.serialization.json)
                 api(libs.kotlinx.coroutines.core)
             }
@@ -63,12 +72,13 @@ android {
     }
 }
 
+
 mavenPublishing {
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
 
     signAllPublications()
 
-    coordinates(group.toString(), "library", version.toString())
+    coordinates(group.toString(), "KMPWindowManager", "0.5.0")
 
     pom {
         name = "KMPWindowManager"
@@ -94,4 +104,12 @@ mavenPublishing {
             }
         }
     }
+}
+
+tasks.named("publishAndReleaseToMavenCentral") {
+    dependsOn("copy-secret-to-gradle-properties")
+}
+
+secrets {
+    propertiesFileName = "secrets.properties"
 }

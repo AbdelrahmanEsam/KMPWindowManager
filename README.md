@@ -1,8 +1,125 @@
-What is KMPWindowManager?
-Library will help you to extract screen Data to support different screen sizes and screen types.
+# KMPWindowManager
 
-please follow the example .
+<div align="center">
+<a href="https://opensource.org/licenses/Apache-2.0"><img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/></a>
+</div>
+
+### KMPWindowManager  provides a unified API that allows you to support different screen sizes and orientations and more.
+
+<hr>
 
 
-Learn more
-about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+KMPWindowManager is available on mavenCentral().
+
+[![Thumbnail](https://img.youtube.com/vi/eF-OnkJoI0U/0.jpg)](https://www.youtube.com/watch?v=eF-OnkJoI0U)
+
+## Install
+
+```kotlin
+implementation("io.github.abdelrahmanesam:KMPWindowManager:0.5.0")
+```
+
+
+
+### How to use it
+
+#### First in `iosMain` 
+
+```kotlin
+// use WindowManagerViewControllerWrapper to start observing your ios changes
+fun MainViewController(): WindowManagerViewControllerWrapper {
+    return App()
+}
+```
+
+#### Second in `androidMain`
+
+```kotlin
+// add observeScreenChanges in your onCreate 
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    observeScreenChanges()
+}
+
+// clearScreenObserver in onDestroy
+override fun onDestroy() {
+    super.onDestroy()
+    clearScreenObserver()
+}
+```
+
+#### In `commonMain`
+
+```kotlin
+@Composable
+fun RootComposable(modifier: Modifier = Modifier) {
+
+    //start collecting your screenData and change it to adaptieUIType
+    val screenData = screenData.collectAsStateWithLifecycle()
+    val adaptiveType =screenData.value?.toAdaptiveLayoutScreenType()
+    when (adaptiveType) {
+        is ScreenOnly -> {
+            FirstScreen(modifier = Modifier.fillMaxSize().background(color = Color.Cyan))
+        }
+
+        is ListOneThirdAndDetailThirds -> {
+            AdaptiveLayoutListOneThirdAndDetailTwoThirds(
+                firstComposable = {
+                    FirstScreen(
+                        modifier = Modifier.fillMaxSize().background(color = Color.Cyan)
+                    )
+                },
+                secondComposable = {
+                    SecondScreen(
+                        modifier = Modifier.fillMaxSize().background(color = Color.Red)
+                    )
+                }
+            )
+        }
+
+        is ListHalfAndDetailHalf -> {
+                AdaptiveLayoutListHalfAndDetailHalf(
+                    firstComposable = {
+                        FirstScreen(
+                            modifier = Modifier.fillMaxSize().background(color = Color.Cyan)
+                        )
+                    },
+                    secondComposable = {
+                        SecondScreen(
+                            modifier = Modifier.fillMaxSize().background(color = Color.Red)
+                        )
+                    }
+                )
+        }
+
+        is ListAndDetailStacked -> {
+            AdaptiveLayoutListAndDetailStacked(
+                firstComposable = {
+                    FirstScreen(modifier = Modifier.fillMaxSize().background(color = Color.Cyan))
+                },
+                secondComposable = {
+                    SecondScreen(modifier = Modifier.fillMaxSize().background(color = Color.Red))
+                }
+            )
+        }
+
+        else -> {
+            FirstScreen(modifier = Modifier.fillMaxSize().background(color = Color.Cyan))
+        }
+    }
+}
+```
+
+### you can also change statusBar color 
+```kotlin
+ChangeBottomNavigationColor(color = Color.Red)
+```
+
+
+### and navigationBar color in android / homeIndicator in ios
+```kotlin
+//note that due to limitations in ios you need to change your 
+// statusBarColor too if you need to change your home indicator color
+// or your statusBarColor will be the same as your home indicator color
+ChangeBottomNavigationColor(color = Color.Red)
+```
