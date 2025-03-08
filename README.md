@@ -53,7 +53,7 @@ override fun onDestroy() {
 @Composable
 fun RootComposable(modifier: Modifier = Modifier) {
 
-    //start collecting your screenData and change it to adaptieUIType
+    //start collecting your screenData and change it to adaptiveUIType
     val screenData = screenData.collectAsStateWithLifecycle()
     val adaptiveType =screenData.value?.toAdaptiveLayoutScreenType()
     when (adaptiveType) {
