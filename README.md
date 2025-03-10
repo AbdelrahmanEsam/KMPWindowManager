@@ -111,7 +111,7 @@ fun RootComposable(modifier: Modifier = Modifier) {
 
 ### you can also change statusBar color 
 ```kotlin
-ChangeBottomNavigationColor(color = Color.Red)
+ChangeStatusBarColor(color = Color.Red)
 ```
 
 
