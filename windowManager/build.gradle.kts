@@ -78,7 +78,7 @@ mavenPublishing {
 
     signAllPublications()
 
-    coordinates(group.toString(), "KMPWindowManager", "0.5.0")
+    coordinates(group.toString(), "KMPWindowManager", libs.kmpwindowmanager.get().toString())
 
     pom {
         name = "KMPWindowManager"

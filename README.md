@@ -15,7 +15,7 @@ KMPWindowManager is available on mavenCentral().
 ## Install
 
 ```kotlin
-implementation("io.github.abdelrahmanesam:KMPWindowManager:0.5.0")
+implementation("io.github.abdelrahmanesam:KMPWindowManager:${latest-version}")
 ```
 
 
