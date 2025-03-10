@@ -85,7 +85,7 @@ mavenPublishing {
         description =
             "extract window info easily with KMPWindowManager and support different screen sizes"
         inceptionYear = "2025"
-        url = "https://github.com/kotlin/multiplatform-library-template/"
+        url = "https://github.com/AbdelrahmanEsam/KMPWindowManager"
         licenses {
             license {
                 name.set("The Apache Software License, Version 2.0")
