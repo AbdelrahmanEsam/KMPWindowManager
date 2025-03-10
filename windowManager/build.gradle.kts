@@ -1,14 +1,6 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import java.io.FileInputStream
-import java.util.Properties
 
-
-tasks.register("copy-secret-to-gradle-properties") {
-    val secretsPropertiesFile = rootProject.file("secrets.properties")
-    val gradlePropertiesFile = rootProject.file("gradle.properties")
-    gradlePropertiesFile.appendText(secretsPropertiesFile.readText())
-}
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -78,7 +70,7 @@ mavenPublishing {
 
     signAllPublications()
 
-    coordinates(group.toString(), "KMPWindowManager", libs.kmpwindowmanager.get().toString())
+    coordinates(group.toString(), "KMPWindowManager", libs.versions.kmpWindowManager.get())
 
     pom {
         name = "KMPWindowManager"
@@ -104,10 +96,6 @@ mavenPublishing {
             }
         }
     }
-}
-
-tasks.named("publishAndReleaseToMavenCentral") {
-    dependsOn("copy-secret-to-gradle-properties")
 }
 
 secrets {
